@@ -246,7 +246,6 @@ public class EmpresaJPanel extends javax.swing.JPanel {
         EmpresaJTextField.setText("");
         CNPJJTextField.setText("");
         CidadeJComboBox.setSelectedIndex(0);
-
     }//GEN-LAST:event_CancelarJButtonActionPerformed
 
     private void EditarjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarjButtonActionPerformed

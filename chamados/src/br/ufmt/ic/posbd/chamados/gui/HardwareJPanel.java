@@ -5,7 +5,17 @@
  */
 package br.ufmt.ic.posbd.chamados.gui;
 
+import br.ufmt.ic.posbd.chamados.FabricaDAO;
+
+import br.ufmt.ic.posbd.chamados.dao.HardwareDAO;
+import br.ufmt.ic.posbd.chamados.tableModel.HardwareTableModel;
 import br.ufmt.ic.posbd.chamadosMySQL.entidade.Tipo;
+
+import br.ufmt.ic.posbd.chamadosMySQL.entidade.Empresa;
+import br.ufmt.ic.posbd.chamadosMySQL.entidade.Hardware;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,24 +23,36 @@ import br.ufmt.ic.posbd.chamadosMySQL.entidade.Tipo;
  */
 public class HardwareJPanel extends javax.swing.JPanel {
 
+    private HardwareTableModel tableModel;
+    private HardwareDAO dao = FabricaDAO.criarHardwareDAO();
+
     /**
      * Creates new form HardwareJPanel
      */
     public HardwareJPanel() {
+        tableModel = new HardwareTableModel(dao.listar());
         this.initComponents();
+        this.CarregarComboBOX();
         this.CarregarComboBoxTipo();
     }
-private void CarregarComboBoxTipo()
-{
-    TipojComboBox.removeAllItems();
-    TipojComboBox.addItem("Selecione um item....");
-    TipojComboBox.addItem(Tipo.Generico.toString());
-    TipojComboBox.addItem(Tipo.Desktop.toString());
-    TipojComboBox.addItem(Tipo.Servidor.toString());
-}
-    
-    
-    
+
+    private void CarregarComboBOX() {
+        FabricanteJComboBox.removeAllItems();
+        List<Empresa> Empresas = FabricaDAO.criarEmpresaDAO().listar();
+        FabricanteJComboBox.addItem("Selecione uma Cidade...");
+        for (Empresa empresa : Empresas) {
+            FabricanteJComboBox.addItem(empresa.getNome());
+        };
+    }
+
+    private void CarregarComboBoxTipo() {
+        TipojComboBox.removeAllItems();
+        TipojComboBox.addItem("Selecione um item....");
+        TipojComboBox.addItem(Tipo.Generico.toString());
+        TipojComboBox.addItem(Tipo.Desktop.toString());
+        TipojComboBox.addItem(Tipo.Servidor.toString());
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,45 +63,80 @@ private void CarregarComboBoxTipo()
     private void initComponents() {
 
         CNPJLabel = new javax.swing.JLabel();
-        CidadeJLabel = new javax.swing.JLabel();
+        FabricanteJLabel = new javax.swing.JLabel();
         IDJTextField = new javax.swing.JTextField();
-        EmpresaJTextField = new javax.swing.JTextField();
+        EquipamentoJTextField = new javax.swing.JTextField();
         idJLabel = new javax.swing.JLabel();
-        CidadeJComboBox = new javax.swing.JComboBox<>();
+        FabricanteJComboBox = new javax.swing.JComboBox<>();
         EmpresaJLabel = new javax.swing.JLabel();
         TipojComboBox = new javax.swing.JComboBox<>();
         ListarjButton = new javax.swing.JButton();
         LimparjButton = new javax.swing.JButton();
-        ExclurjButton = new javax.swing.JButton();
+        ExcluirJButton = new javax.swing.JButton();
         CancelarjButton = new javax.swing.JButton();
         editarjButton = new javax.swing.JButton();
-        SalvarjButton = new javax.swing.JButton();
+        SalvarJButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelaJTable = new javax.swing.JTable();
 
         CNPJLabel.setText("Tipo:");
 
-        CidadeJLabel.setText("Cidade:");
+        FabricanteJLabel.setText("Fabricante:");
 
         IDJTextField.setEnabled(false);
 
         idJLabel.setText("Id:");
 
-        CidadeJComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        FabricanteJComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         EmpresaJLabel.setText("Equipamento:");
 
         TipojComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         ListarjButton.setText("Listar");
+        ListarjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListarjButtonActionPerformed(evt);
+            }
+        });
 
         LimparjButton.setText("Limpar");
+        LimparjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LimparjButtonActionPerformed(evt);
+            }
+        });
 
-        ExclurjButton.setText("Excluir");
+        ExcluirJButton.setText("Excluir");
+        ExcluirJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExcluirJButtonActionPerformed(evt);
+            }
+        });
 
         CancelarjButton.setText("Cancelar");
+        CancelarjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarjButtonActionPerformed(evt);
+            }
+        });
 
         editarjButton.setText("Editar");
+        editarjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarjButtonActionPerformed(evt);
+            }
+        });
 
-        SalvarjButton.setText("Salvar");
+        SalvarJButton.setText("Salvar");
+        SalvarJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalvarJButtonActionPerformed(evt);
+            }
+        });
+
+        tabelaJTable.setModel(tableModel);
+        jScrollPane1.setViewportView(tabelaJTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -90,23 +147,22 @@ private void CarregarComboBoxTipo()
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(13, 13, 13)
-                                        .addComponent(CNPJLabel))
-                                    .addComponent(CidadeJLabel)))
+                                .addGap(53, 53, 53)
+                                .addComponent(CNPJLabel))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addComponent(EmpresaJLabel))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(62, 62, 62)
-                                .addComponent(idJLabel)))
-                        .addGap(21, 21, 21)
+                                .addComponent(idJLabel))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(FabricanteJLabel)))
+                        .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CidadeJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(FabricanteJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(TipojComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(EmpresaJTextField)
+                            .addComponent(EquipamentoJTextField)
                             .addComponent(IDJTextField)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -114,13 +170,14 @@ private void CarregarComboBoxTipo()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(LimparjButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
-                        .addComponent(SalvarjButton)
+                        .addComponent(SalvarJButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(editarjButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CancelarjButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ExclurjButton)))
+                        .addComponent(ExcluirJButton))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -137,7 +194,7 @@ private void CarregarComboBoxTipo()
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(EmpresaJLabel))
-                    .addComponent(EmpresaJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(EquipamentoJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -145,40 +202,128 @@ private void CarregarComboBoxTipo()
                         .addComponent(CNPJLabel))
                     .addComponent(TipojComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(CidadeJLabel))
-                    .addComponent(CidadeJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(FabricanteJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FabricanteJLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(ListarjButton)
                         .addComponent(LimparjButton))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(ExclurjButton)
+                        .addComponent(ExcluirJButton)
                         .addComponent(CancelarjButton)
                         .addComponent(editarjButton)
-                        .addComponent(SalvarjButton)))
-                .addContainerGap())
+                        .addComponent(SalvarJButton)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                .addGap(140, 140, 140))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ListarjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarjButtonActionPerformed
+        // TODO add your handling code here:
+        tabelaJTable.setModel(tableModel);
+         tableModel.atualizar(dao.listar());
+    }//GEN-LAST:event_ListarjButtonActionPerformed
+
+    private void LimparjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimparjButtonActionPerformed
+        // TODO add your handling code here:
+        tabelaJTable.setModel(new DefaultTableModel());
+    }//GEN-LAST:event_LimparjButtonActionPerformed
+
+    private void ExcluirJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirJButtonActionPerformed
+        // TODO add your handling code here:
+                int[] linhas = tabelaJTable.getSelectedRows();
+        if (JOptionPane.showConfirmDialog(ExcluirJButton,
+                "Deseja realmente excluir?")
+                == JOptionPane.YES_OPTION) {
+
+            for (int i = 0; i < linhas.length; i++) {
+                Hardware hardware = tableModel.get(linhas[i]);
+                dao.excluir(hardware.getId());
+            }
+            JOptionPane.showMessageDialog(tabelaJTable,
+                    "Removidos com Sucesso!");
+            tableModel.atualizar(dao.listar());
+        }
+    }//GEN-LAST:event_ExcluirJButtonActionPerformed
+
+    private void CancelarjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarjButtonActionPerformed
+        // TODO add your handling code here:
+        IDJTextField.setText("");
+        EquipamentoJTextField.setText("");
+        FabricanteJComboBox.setSelectedIndex(0);
+        TipojComboBox.setSelectedIndex(0);
+    }//GEN-LAST:event_CancelarjButtonActionPerformed
+
+    private void editarjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarjButtonActionPerformed
+        // TODO add your handling code here:
+            if (tabelaJTable.getSelectedRowCount() == 1) {
+            int linha = tabelaJTable.getSelectedRow();
+            Hardware edicao = tableModel.get(linha);
+            IDJTextField.setText(edicao.getId() + "");
+            EquipamentoJTextField.setText(edicao.getNome());
+            TipojComboBox.setSelectedItem(edicao.getTipo());
+            FabricanteJComboBox.setSelectedItem(edicao.getFabricante());
+        } else {
+            JOptionPane.showMessageDialog(tabelaJTable,
+                    "Selecione somente 1 linha!");
+        }
+    }//GEN-LAST:event_editarjButtonActionPerformed
+
+    private void SalvarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarJButtonActionPerformed
+        // TODO add your handling code here:
+
+        
+            if (!EquipamentoJTextField.getText().equals("")) {
+            Hardware hardware = new Hardware();
+
+            hardware.setNome(EquipamentoJTextField.getText());
+            hardware.setTipo(TipojComboBox.getSelectedItem().toString());
+            hardware.setFabricante(FabricanteJComboBox.getSelectedItem().toString());
+
+            if(!IDJTextField.getText().equals("")){
+                int id = Integer.parseInt(IDJTextField.getText());
+                hardware.setId(id);
+                dao.alterar(hardware);
+                JOptionPane.showMessageDialog(SalvarJButton,
+                    "Atualizado com Sucesso!");
+            }else{
+                dao.inserir(hardware);
+                JOptionPane.showMessageDialog(SalvarJButton,
+                    "Inserido com Sucesso!");
+            }
+
+            tableModel.atualizar(dao.listar());
+            
+            
+           CancelarjButtonActionPerformed(evt);
+            
+        }else{
+            JOptionPane.showMessageDialog(EquipamentoJTextField,
+                    "Informe o campo nome!");
+            EquipamentoJTextField.grabFocus();
+        }
+    }//GEN-LAST:event_SalvarJButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CNPJLabel;
     private javax.swing.JButton CancelarjButton;
-    private javax.swing.JComboBox<String> CidadeJComboBox;
-    private javax.swing.JLabel CidadeJLabel;
     private javax.swing.JLabel EmpresaJLabel;
-    private javax.swing.JTextField EmpresaJTextField;
-    private javax.swing.JButton ExclurjButton;
+    private javax.swing.JTextField EquipamentoJTextField;
+    private javax.swing.JButton ExcluirJButton;
+    private javax.swing.JComboBox<String> FabricanteJComboBox;
+    private javax.swing.JLabel FabricanteJLabel;
     private javax.swing.JTextField IDJTextField;
     private javax.swing.JButton LimparjButton;
     private javax.swing.JButton ListarjButton;
-    private javax.swing.JButton SalvarjButton;
+    private javax.swing.JButton SalvarJButton;
     private javax.swing.JComboBox<String> TipojComboBox;
     private javax.swing.JButton editarjButton;
     private javax.swing.JLabel idJLabel;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tabelaJTable;
     // End of variables declaration//GEN-END:variables
 }

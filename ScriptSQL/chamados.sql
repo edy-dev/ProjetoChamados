@@ -57,4 +57,13 @@ INSERT INTO `chamados`.`hardware` (`nome`, `tipo`, `fabricante`) VALUES ('PC 63 
 INSERT INTO `chamados`.`hardware` (`nome`, `tipo`, `fabricante`) VALUES ('Seridor IBM 3550', 'Servidor', 'IBM');
 INSERT INTO `chamados`.`hardware` (`nome`, `tipo`, `fabricante`) VALUES ('Fone de Ouvido', 'Generico', 'Microsoft');
 INSERT INTO `chamados`.`hardware` (`nome`, `tipo`, `fabricante`) VALUES ('Monitor 3D', 'Desktop', 'IBM');
+INSERT INTO `chamados`.`hardware` (`nome`, `tipo`, `fabricante`) VALUES ('Servidor VMware vSphere Hypervisor', 'Servidor', 'HOYLER Tecnologia');
 select * from `chamados`.`hardware`;
+
+
+
+
+
+
+
+
