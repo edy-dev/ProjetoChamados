@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package br.ufmt.ic.posbd.chamados.dao;
-
-import br.ufmt.ic.posbd.chamadosMySQL.entidade.Cidade;
+package br.ufmt.ic.posbd.chamadosMySQL.entidade;
 
 /**
  *
  * @author edy
  */
-public interface CidadeDAO extends DAO<Cidade>{
-    
+public enum Tipo {
+    Generico, Desktop, Servidor;
 }

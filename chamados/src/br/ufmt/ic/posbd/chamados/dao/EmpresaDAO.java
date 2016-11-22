@@ -6,12 +6,12 @@
 
 package br.ufmt.ic.posbd.chamados.dao;
 
-import br.ufmt.ic.posbd.chamadosMySQL.entidade.Cidade;
+import br.ufmt.ic.posbd.chamadosMySQL.entidade.Empresa;
 
 /**
  *
  * @author edy
  */
-public interface CidadeDAO extends DAO<Cidade>{
+public interface EmpresaDAO extends DAO<Empresa>{
     
 }

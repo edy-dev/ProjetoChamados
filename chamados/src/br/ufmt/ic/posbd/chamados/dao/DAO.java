@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author raphael
+ * @author edy
  */
 public interface DAO<T> {
     

@@ -13,6 +13,9 @@ package br.ufmt.ic.posbd.chamados;
 import br.ufmt.ic.posbd.chamados.dao.CidadeDAO;
 import br.ufmt.ic.posbd.chamados.dao.jpa.CidadeDAOImpl;
 
+import br.ufmt.ic.posbd.chamados.dao.EmpresaDAO;
+import br.ufmt.ic.posbd.chamados.dao.jpa.EmpresaDAOImpl;
+ 
 /**
  *
  * @author edy
@@ -21,7 +24,9 @@ public class FabricaDAO {
     
         public static CidadeDAO criarCidadeDAO(){
         return new CidadeDAOImpl();
-    }
+    };
 
-    
+        public static EmpresaDAO criarEmpresaDAO(){
+        return new EmpresaDAOImpl();
+    };
 }

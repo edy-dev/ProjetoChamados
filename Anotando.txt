@@ -9,6 +9,8 @@ D:\Git\chamados
 br.ufmt.ic.posbd.chamados.Main
 
 br.ufmt.ic.posbd.chamados
+br.ufmt.ic.posbd.chamados.dao
+br.ufmt.ic.posbd.chamados.dao.jpa
 br.ufmt.ic.posbd.chamados.gui
 br.ufmt.ic.posbd.chamados.tableModel
 

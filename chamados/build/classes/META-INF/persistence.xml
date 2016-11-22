@@ -3,6 +3,8 @@
   <persistence-unit name="chamadosPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jar-file>../../../chamadosMySQL/dist/chamadosMySQL.jar</jar-file>
+    <class>br.ufmt.ic.posbd.chamadosMySQL.entidade.Empresa</class>
+    <class>br.ufmt.ic.posbd.chamadosMySQL.entidade.Cidade</class>
     <properties>
       <property name="eclipselink.composite-unit" value="true"/>
     </properties>

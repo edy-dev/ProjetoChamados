@@ -205,16 +205,15 @@ public class CidadeJPanel extends javax.swing.JPanel {
 
     private void ListarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarJButtonActionPerformed
         // TODO add your handling code here:
-//        int escolha = JOptionPane.showConfirmDialog(null, "Fazendo Nada Bommm", "Booom", JOptionPane.PLAIN_MESSAGE);
-//        if (escolha == 0) { //The ISSUE is here
-//            System.exit(0);
-//        } else {
-//            this.setFocusable(true);
-//        }
-
+        //        int escolha = JOptionPane.showConfirmDialog(null, "Fazendo Nada Bommm", "Booom", JOptionPane.PLAIN_MESSAGE);
+        //        if (escolha == 0) { //The ISSUE is here
+        //            System.exit(0);
+        //        } else {
+        //            this.setFocusable(true);
+        //        }
+        
         tabelaJTable.setModel(tableModel);
-
-
+        tableModel.atualizar(dao.listar());
     }//GEN-LAST:event_ListarJButtonActionPerformed
 
     private void LimparJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimparJButtonActionPerformed
@@ -267,32 +266,30 @@ public class CidadeJPanel extends javax.swing.JPanel {
 
     private void SalvarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarJButtonActionPerformed
         // TODO add your handling code here:
-         if (!CidadeJTextField.getText().equals("")) {
+        if (!CidadeJTextField.getText().equals("")) {
             Cidade cidade = new Cidade();
 
             cidade.setNome(CidadeJTextField.getText());
             cidade.setEstado(EstadoJTextField.getText());
-             cidade.setPais(PaisJTextField.getText());
-            
+            cidade.setPais(PaisJTextField.getText());
 
-            if(!IDJTextField.getText().equals("")){
+            if (!IDJTextField.getText().equals("")) {
                 int id = Integer.parseInt(IDJTextField.getText());
                 cidade.setId(id);
                 dao.alterar(cidade);
                 JOptionPane.showMessageDialog(SalvarJButton,
-                    "Atualizado com Sucesso!");
-            }else{
+                        "Atualizado com Sucesso!");
+            } else {
                 dao.inserir(cidade);
                 JOptionPane.showMessageDialog(SalvarJButton,
-                    "Inserido com Sucesso!");
+                        "Inserido com Sucesso!");
             }
 
             tableModel.atualizar(dao.listar());
-            
-            
-           CancelarJButtonActionPerformed(evt);
-            
-        }else{
+
+            CancelarJButtonActionPerformed(evt);
+
+        } else {
             JOptionPane.showMessageDialog(CidadeJTextField,
                     "Informe o campo nome!");
             CidadeJTextField.grabFocus();

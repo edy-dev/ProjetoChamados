@@ -10,7 +10,7 @@ import javax.swing.table.AbstractTableModel;
 
 /**
  *
- * @author raphael
+ * @author edy
  */
 public abstract class TableModel<T> extends AbstractTableModel {
 

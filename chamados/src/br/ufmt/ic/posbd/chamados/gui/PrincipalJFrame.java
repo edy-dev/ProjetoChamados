@@ -34,10 +34,11 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         ConteudoPrincipalJPanel = new javax.swing.JPanel();
         jMenuBarPrincipal = new javax.swing.JMenuBar();
         menuCadastrojMenu = new javax.swing.JMenu();
-        menuCidadeMenu = new javax.swing.JMenuItem();
-        menuEmpresajMenu = new javax.swing.JMenuItem();
-        menuPessoajMenu = new javax.swing.JMenuItem();
+        FabricantejMenu = new javax.swing.JMenu();
+        CidadejMenuItem = new javax.swing.JMenuItem();
+        EmpresajMenuItem = new javax.swing.JMenuItem();
         menuHardwarejMenu = new javax.swing.JMenuItem();
+        menuPessoajMenu = new javax.swing.JMenuItem();
         menuChamadosjMenu = new javax.swing.JMenuItem();
         menuAjudajMenu = new javax.swing.JMenu();
         menuSobrejMenu = new javax.swing.JMenuItem();
@@ -57,22 +58,36 @@ public class PrincipalJFrame extends javax.swing.JFrame {
 
         menuCadastrojMenu.setText("Cadastro");
 
-        menuCidadeMenu.setText("Cidade");
-        menuCidadeMenu.addActionListener(new java.awt.event.ActionListener() {
+        FabricantejMenu.setText("Fabricante");
+
+        CidadejMenuItem.setText("Cidade");
+        CidadejMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuCidadeMenuActionPerformed(evt);
+                CidadejMenuItemActionPerformed(evt);
             }
         });
-        menuCadastrojMenu.add(menuCidadeMenu);
+        FabricantejMenu.add(CidadejMenuItem);
 
-        menuEmpresajMenu.setText("Empresa");
-        menuCadastrojMenu.add(menuEmpresajMenu);
+        EmpresajMenuItem.setText("Empresa");
+        EmpresajMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EmpresajMenuItemActionPerformed(evt);
+            }
+        });
+        FabricantejMenu.add(EmpresajMenuItem);
+
+        menuCadastrojMenu.add(FabricantejMenu);
+
+        menuHardwarejMenu.setText("Hardware");
+        menuHardwarejMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuHardwarejMenuActionPerformed(evt);
+            }
+        });
+        menuCadastrojMenu.add(menuHardwarejMenu);
 
         menuPessoajMenu.setText("Pessoa");
         menuCadastrojMenu.add(menuPessoajMenu);
-
-        menuHardwarejMenu.setText("Hardware");
-        menuCadastrojMenu.add(menuHardwarejMenu);
 
         menuChamadosjMenu.setText("Chamado");
         menuCadastrojMenu.add(menuChamadosjMenu);
@@ -138,10 +153,20 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         this.setConteudo(new SobreJPanel());
     }//GEN-LAST:event_menuSobrejMenuActionPerformed
 
-    private void menuCidadeMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCidadeMenuActionPerformed
+    private void menuHardwarejMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuHardwarejMenuActionPerformed
+        // TODO add your handling code here:
+        this.setConteudo(new HardwareJPanel());
+    }//GEN-LAST:event_menuHardwarejMenuActionPerformed
+
+    private void EmpresajMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmpresajMenuItemActionPerformed
+        // TODO add your handling code here:
+        this.setConteudo(new EmpresaJPanel());
+    }//GEN-LAST:event_EmpresajMenuItemActionPerformed
+
+    private void CidadejMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CidadejMenuItemActionPerformed
         // TODO add your handling code here:
         this.setConteudo(new CidadeJPanel());
-    }//GEN-LAST:event_menuCidadeMenuActionPerformed
+    }//GEN-LAST:event_CidadejMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,14 +204,15 @@ public class PrincipalJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem CidadejMenuItem;
     private javax.swing.JPanel ConteudoPrincipalJPanel;
+    private javax.swing.JMenuItem EmpresajMenuItem;
+    private javax.swing.JMenu FabricantejMenu;
     private javax.swing.JButton btnSair;
     private javax.swing.JMenuBar jMenuBarPrincipal;
     private javax.swing.JMenu menuAjudajMenu;
     private javax.swing.JMenu menuCadastrojMenu;
     private javax.swing.JMenuItem menuChamadosjMenu;
-    private javax.swing.JMenuItem menuCidadeMenu;
-    private javax.swing.JMenuItem menuEmpresajMenu;
     private javax.swing.JMenuItem menuHardwarejMenu;
     private javax.swing.JMenuItem menuPessoajMenu;
     private javax.swing.JMenuItem menuSobrejMenu;
