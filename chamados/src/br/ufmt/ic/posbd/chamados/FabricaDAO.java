@@ -14,6 +14,10 @@ import br.ufmt.ic.posbd.chamados.dao.jpa.EmpresaDAOImpl;
 import br.ufmt.ic.posbd.chamados.dao.HardwareDAO;
 import br.ufmt.ic.posbd.chamados.dao.jpa.HardwareDAOImpl;
 
+import br.ufmt.ic.posbd.chamados.dao.SolicitanteDAO;
+import br.ufmt.ic.posbd.chamados.dao.jpa.SolicitanteDAOImpl;
+
+
 /**
  *
  * @author edy
@@ -22,17 +26,16 @@ public class FabricaDAO {
 
     public static CidadeDAO criarCidadeDAO() {
         return new CidadeDAOImpl();
-    }
-
-    ;
+    };
 
     public static EmpresaDAO criarEmpresaDAO() {
         return new EmpresaDAOImpl();
-    }
-
-    ;
+    };
     public static HardwareDAO criarHardwareDAO() {
         return new HardwareDAOImpl();
-    }
-;
+    };
+    public static SolicitanteDAO criarSolicitanteDAO() {
+        return new SolicitanteDAOImpl();
+    };
+    
 }

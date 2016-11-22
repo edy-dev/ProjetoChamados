@@ -76,17 +76,22 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         });
         FabricantejMenu.add(EmpresajMenuItem);
 
-        menuCadastrojMenu.add(FabricantejMenu);
-
         menuHardwarejMenu.setText("Hardware");
         menuHardwarejMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuHardwarejMenuActionPerformed(evt);
             }
         });
-        menuCadastrojMenu.add(menuHardwarejMenu);
+        FabricantejMenu.add(menuHardwarejMenu);
 
-        menuPessoajMenu.setText("Pessoa");
+        menuCadastrojMenu.add(FabricantejMenu);
+
+        menuPessoajMenu.setText("Pessoa Solicitante");
+        menuPessoajMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuPessoajMenuActionPerformed(evt);
+            }
+        });
         menuCadastrojMenu.add(menuPessoajMenu);
 
         menuChamadosjMenu.setText("Chamado");
@@ -167,6 +172,11 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setConteudo(new CidadeJPanel());
     }//GEN-LAST:event_CidadejMenuItemActionPerformed
+
+    private void menuPessoajMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPessoajMenuActionPerformed
+        // TODO add your handling code here:
+         this.setConteudo(new SolicitanteJPanel());
+    }//GEN-LAST:event_menuPessoajMenuActionPerformed
 
     /**
      * @param args the command line arguments

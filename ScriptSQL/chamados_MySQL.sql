@@ -36,7 +36,9 @@ CREATE TABLE `chamados`.`empresa` (
 INSERT INTO `chamados`.`empresa` (`nome`, `cnpj`, `cidade`) VALUES ('HOYLER Tecnologia', '14.795.364/0001-10', 'Cuiaba');
 INSERT INTO `chamados`.`empresa` (`nome`, `cnpj`, `cidade`) VALUES ('IBM', '15.795.364/0001-10', 'Sinop');
 INSERT INTO `chamados`.`empresa` (`nome`, `cnpj`, `cidade`) VALUES ('Microsoft', '16.795.364/0001-10', 'Juara');
-INSERT INTO `chamados`.`empresa` (`nome`, `cnpj`, `cidade`) VALUES ('Generico', '16.795.364/0001-10', 'Cuiaba');
+INSERT INTO `chamados`.`empresa` (`nome`, `cnpj`, `cidade`) VALUES ('EmpresaSemUsar1', '16.795.364/0001-10', 'Cuiaba');
+INSERT INTO `chamados`.`empresa` (`nome`, `cnpj`, `cidade`) VALUES ('EmpresaSemUsar2', '16.795.364/0001-10', 'Cuiaba');
+INSERT INTO `chamados`.`empresa` (`nome`, `cnpj`, `cidade`) VALUES ('EmpresaSemUsar3', '16.795.364/0001-10', 'Cuiaba');
 select * from `chamados`.`empresa`;
 
 

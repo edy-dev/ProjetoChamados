@@ -5,7 +5,7 @@
  */
 package br.ufmt.ic.posbd.chamados.tableModel;
 
-import br.ufmt.ic.posbd.chamadosMySQL.entidade.Cidade;
+import br.ufmt.ic.posbd.chamadosPostgres.entidade.Solicitante;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -13,13 +13,13 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author edy
  */
-public class CidadeTableModel extends AbstractTableModel {
+public class SolicitanteTableModel extends AbstractTableModel {
 
-    private List<Cidade> lista;
+    private List<Solicitante> lista;
     private final String[] titulos = new String[]{"Id",
-         "Cidade", "Estado", "Pais"};
+         "Nome", "CPF"};
 
-    public CidadeTableModel(List<Cidade> lista) {
+    public SolicitanteTableModel(List<Solicitante> lista) {
         this.lista = lista;
     }
 
@@ -35,38 +35,34 @@ public class CidadeTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 3;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Object ret = null;
-        Cidade cidade = lista.get(rowIndex);
+        Solicitante solicitante = lista.get(rowIndex);
 
         switch (columnIndex) {
             case 0:
-                ret = cidade.getId();
+                ret = solicitante.getId();
                 break;
             case 1:
-                ret = cidade.getNome();
+                ret = solicitante.getNome();
                 break;
             case 2:
-                ret = cidade.getEstado();
-                break;
-            case 3:
-                ret = cidade.getPais();
+                ret = solicitante.getCPF();
                 break;
         }
-
         return ret;
     }
 
-    public void atualizar(List<Cidade> lista) {
+    public void atualizar(List<Solicitante> lista) {
         this.lista = lista;
         fireTableDataChanged();
     }
 
-    public Cidade get(int index) {
+    public Solicitante get(int index) {
         return lista.get(index);
     }
 

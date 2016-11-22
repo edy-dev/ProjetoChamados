@@ -61,3 +61,10 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+/chamadosMySQL/build/
+/chamados/build/
+/chamadosMySQL/dist/
+/chamadosPostgres/nbproject/private/
+/chamadosPostgres/build/
+/chamadosPostgres/dist/
+/chamados/dist/

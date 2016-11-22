@@ -1,10 +1,6 @@
 
 
 
-[240,240,240]
-
-Chamados
-D:\Git\chamados
 
 br.ufmt.ic.posbd.chamados.Main
 
@@ -16,8 +12,12 @@ br.ufmt.ic.posbd.chamados.tableModel
 
 
 br.ufmt.ic.posbd.chamadosMySQL.Main
-
 br.ufmt.ic.posbd.chamadosMySQL
 br.ufmt.ic.posbd.chamadosMySQL.entidade
+
+
+br.ufmt.ic.posbd.chamadosPostgres.Main
+br.ufmt.ic.posbd.chamadosPostgres
+br.ufmt.ic.posbd.chamadosPostgres.entidade
 
 
