@@ -205,13 +205,7 @@ public class CidadeJPanel extends javax.swing.JPanel {
 
     private void ListarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarJButtonActionPerformed
         // TODO add your handling code here:
-        //        int escolha = JOptionPane.showConfirmDialog(null, "Fazendo Nada Bommm", "Booom", JOptionPane.PLAIN_MESSAGE);
-        //        if (escolha == 0) { //The ISSUE is here
-        //            System.exit(0);
-        //        } else {
-        //            this.setFocusable(true);
-        //        }
-        
+
         tabelaJTable.setModel(tableModel);
         tableModel.atualizar(dao.listar());
     }//GEN-LAST:event_ListarJButtonActionPerformed
@@ -223,19 +217,24 @@ public class CidadeJPanel extends javax.swing.JPanel {
 
     private void ExcluirJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirJButtonActionPerformed
         // TODO add your handling code here:
+        if (tabelaJTable.getSelectedRowCount() == 1) {
 
-        int[] linhas = tabelaJTable.getSelectedRows();
-        if (JOptionPane.showConfirmDialog(ExcluirJButton,
-                "Deseja realmente excluir?")
-                == JOptionPane.YES_OPTION) {
+            int[] linhas = tabelaJTable.getSelectedRows();
+            if (JOptionPane.showConfirmDialog(ExcluirJButton,
+                    "Deseja realmente excluir?")
+                    == JOptionPane.YES_OPTION) {
 
-            for (int i = 0; i < linhas.length; i++) {
-                Cidade cidade = tableModel.get(linhas[i]);
-                dao.excluir(cidade.getId());
+                for (int i = 0; i < linhas.length; i++) {
+                    Cidade cidade = tableModel.get(linhas[i]);
+                    dao.excluir(cidade.getId());
+                }
+                JOptionPane.showMessageDialog(tabelaJTable,
+                        "Removidos com Sucesso!");
+                tableModel.atualizar(dao.listar());
             }
+        } else {
             JOptionPane.showMessageDialog(tabelaJTable,
-                    "Removidos com Sucesso!");
-            tableModel.atualizar(dao.listar());
+                    "Selecione somente 1 linha!");
         }
     }//GEN-LAST:event_ExcluirJButtonActionPerformed
 

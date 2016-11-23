@@ -32,14 +32,17 @@ public class PrincipalJFrame extends javax.swing.JFrame {
 
         btnSair = new javax.swing.JButton();
         ConteudoPrincipalJPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBarPrincipal = new javax.swing.JMenuBar();
         menuCadastrojMenu = new javax.swing.JMenu();
         FabricantejMenu = new javax.swing.JMenu();
         CidadejMenuItem = new javax.swing.JMenuItem();
         EmpresajMenuItem = new javax.swing.JMenuItem();
         menuHardwarejMenu = new javax.swing.JMenuItem();
+        ChamadosjMenu = new javax.swing.JMenu();
         menuPessoajMenu = new javax.swing.JMenuItem();
         menuChamadosjMenu = new javax.swing.JMenuItem();
+        SairJMenuItem = new javax.swing.JMenuItem();
         menuAjudajMenu = new javax.swing.JMenu();
         menuSobrejMenu = new javax.swing.JMenuItem();
 
@@ -55,6 +58,8 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         });
 
         ConteudoPrincipalJPanel.setLayout(new java.awt.BorderLayout());
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufmt/ic/posbd/chamados/gui/img/logo_ufmt.png"))); // NOI18N
 
         menuCadastrojMenu.setText("Cadastro");
 
@@ -86,16 +91,33 @@ public class PrincipalJFrame extends javax.swing.JFrame {
 
         menuCadastrojMenu.add(FabricantejMenu);
 
-        menuPessoajMenu.setText("Pessoa Solicitante");
+        ChamadosjMenu.setText("Chamados");
+
+        menuPessoajMenu.setText("Solicitante");
         menuPessoajMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuPessoajMenuActionPerformed(evt);
             }
         });
-        menuCadastrojMenu.add(menuPessoajMenu);
+        ChamadosjMenu.add(menuPessoajMenu);
 
-        menuChamadosjMenu.setText("Chamado");
-        menuCadastrojMenu.add(menuChamadosjMenu);
+        menuChamadosjMenu.setText("Abrir Chamado");
+        menuChamadosjMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuChamadosjMenuActionPerformed(evt);
+            }
+        });
+        ChamadosjMenu.add(menuChamadosjMenu);
+
+        menuCadastrojMenu.add(ChamadosjMenu);
+
+        SairJMenuItem.setText("Sair/Close/Fechar");
+        SairJMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SairJMenuItemActionPerformed(evt);
+            }
+        });
+        menuCadastrojMenu.add(SairJMenuItem);
 
         jMenuBarPrincipal.add(menuCadastrojMenu);
 
@@ -117,17 +139,23 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ConteudoPrincipalJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 459, Short.MAX_VALUE)
-                .addComponent(btnSair))
+            .addComponent(ConteudoPrincipalJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSair)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(ConteudoPrincipalJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 298, Short.MAX_VALUE)
-                .addComponent(btnSair))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSair, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
 
         pack();
@@ -144,7 +172,7 @@ public class PrincipalJFrame extends javax.swing.JFrame {
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         // TODO add your handling code here:
         //Sair
-        int escolha = JOptionPane.showConfirmDialog(null, "Realmente deseas sair?", "Aviso", JOptionPane.YES_NO_OPTION);
+        int escolha = JOptionPane.showConfirmDialog(null, "Realmente deseas sair?", "Sair/Fechar/Close", JOptionPane.YES_NO_OPTION);
         if (escolha == 0) { //The ISSUE is here
             System.exit(0);
         } else {
@@ -177,6 +205,16 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
          this.setConteudo(new SolicitanteJPanel());
     }//GEN-LAST:event_menuPessoajMenuActionPerformed
+
+    private void menuChamadosjMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuChamadosjMenuActionPerformed
+        // TODO add your handling code here:
+        this.setConteudo(new RegistrosJPanel());
+    }//GEN-LAST:event_menuChamadosjMenuActionPerformed
+
+    private void SairJMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SairJMenuItemActionPerformed
+        // TODO add your handling code here:
+        btnSairActionPerformed(evt);
+    }//GEN-LAST:event_SairJMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,11 +252,14 @@ public class PrincipalJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu ChamadosjMenu;
     private javax.swing.JMenuItem CidadejMenuItem;
     private javax.swing.JPanel ConteudoPrincipalJPanel;
     private javax.swing.JMenuItem EmpresajMenuItem;
     private javax.swing.JMenu FabricantejMenu;
+    private javax.swing.JMenuItem SairJMenuItem;
     private javax.swing.JButton btnSair;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBarPrincipal;
     private javax.swing.JMenu menuAjudajMenu;
     private javax.swing.JMenu menuCadastrojMenu;

@@ -17,6 +17,8 @@ import br.ufmt.ic.posbd.chamados.dao.jpa.HardwareDAOImpl;
 import br.ufmt.ic.posbd.chamados.dao.SolicitanteDAO;
 import br.ufmt.ic.posbd.chamados.dao.jpa.SolicitanteDAOImpl;
 
+import br.ufmt.ic.posbd.chamados.dao.RegistrosDAO;
+import br.ufmt.ic.posbd.chamados.dao.jpa.RegistrosDAOImpl;
 
 /**
  *
@@ -37,5 +39,7 @@ public class FabricaDAO {
     public static SolicitanteDAO criarSolicitanteDAO() {
         return new SolicitanteDAOImpl();
     };
-    
+    public static RegistrosDAO criarRegistrosDAO() {
+        return new RegistrosDAOImpl();
+    };
 }

@@ -12,7 +12,6 @@ import br.ufmt.ic.posbd.chamadosPostgres.entidade.Solicitante;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author edy
@@ -21,7 +20,7 @@ public class SolicitanteJPanel extends javax.swing.JPanel {
 
     private SolicitanteTableModel tableModel;
     private SolicitanteDAO dao = FabricaDAO.criarSolicitanteDAO();
-    
+
     /**
      * Creates new form PessoaJPanel
      */
@@ -172,19 +171,23 @@ public class SolicitanteJPanel extends javax.swing.JPanel {
 
     private void ExcluirJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirJButtonActionPerformed
         // TODO add your handling code here:
+        if (tabelaJTable.getSelectedRowCount() == 1) {
+            int[] linhas = tabelaJTable.getSelectedRows();
+            if (JOptionPane.showConfirmDialog(ExcluirJButton,
+                    "Deseja realmente excluir?")
+                    == JOptionPane.YES_OPTION) {
 
-        int[] linhas = tabelaJTable.getSelectedRows();
-        if (JOptionPane.showConfirmDialog(ExcluirJButton,
-            "Deseja realmente excluir?")
-        == JOptionPane.YES_OPTION) {
-
-        for (int i = 0; i < linhas.length; i++) {
-            Solicitante solicitante = tableModel.get(linhas[i]);
-            dao.excluir(solicitante.getId());
-        }
-        JOptionPane.showMessageDialog(tabelaJTable,
-            "Removidos com Sucesso!");
-        tableModel.atualizar(dao.listar());
+                for (int i = 0; i < linhas.length; i++) {
+                    Solicitante solicitante = tableModel.get(linhas[i]);
+                    dao.excluir(solicitante.getId());
+                }
+                JOptionPane.showMessageDialog(tabelaJTable,
+                        "Removidos com Sucesso!");
+                tableModel.atualizar(dao.listar());
+            }
+        } else {
+            JOptionPane.showMessageDialog(tabelaJTable,
+                    "Selecione somente 1 linha!");
         }
     }//GEN-LAST:event_ExcluirJButtonActionPerformed
 
@@ -206,7 +209,7 @@ public class SolicitanteJPanel extends javax.swing.JPanel {
 
         } else {
             JOptionPane.showMessageDialog(tabelaJTable,
-                "Selecione somente 1 linha!");
+                    "Selecione somente 1 linha!");
         }
     }//GEN-LAST:event_EditarjButtonActionPerformed
 
@@ -217,26 +220,26 @@ public class SolicitanteJPanel extends javax.swing.JPanel {
 
             solicitante.setNome(NomeJTextField.getText());
             solicitante.setCPF(CPFJTextField.getText());
-            
-            if(!IDJTextField.getText().equals("")){
+
+            if (!IDJTextField.getText().equals("")) {
                 int id = Integer.parseInt(IDJTextField.getText());
                 solicitante.setId(id);
                 dao.alterar(solicitante);
                 JOptionPane.showMessageDialog(SalvarJButton,
-                    "Atualizado com Sucesso!");
-            }else{
+                        "Atualizado com Sucesso!");
+            } else {
                 dao.inserir(solicitante);
                 JOptionPane.showMessageDialog(SalvarJButton,
-                    "Inserido com Sucesso!");
+                        "Inserido com Sucesso!");
             }
 
             tableModel.atualizar(dao.listar());
 
             CancelarJButtonActionPerformed(evt);
 
-        }else{
+        } else {
             JOptionPane.showMessageDialog(NomeJTextField,
-                "Informe o campo nome!");
+                    "Informe o campo nome!");
             NomeJTextField.grabFocus();
         }
     }//GEN-LAST:event_SalvarJButtonActionPerformed

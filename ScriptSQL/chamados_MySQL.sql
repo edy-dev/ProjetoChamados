@@ -58,8 +58,11 @@ INSERT INTO `chamados`.`hardware` (`nome`, `tipo`, `fabricante`) VALUES ('Teclad
 INSERT INTO `chamados`.`hardware` (`nome`, `tipo`, `fabricante`) VALUES ('PC 63 i3', 'Desktop', 'Microsoft');
 INSERT INTO `chamados`.`hardware` (`nome`, `tipo`, `fabricante`) VALUES ('Seridor IBM 3550', 'Servidor', 'IBM');
 INSERT INTO `chamados`.`hardware` (`nome`, `tipo`, `fabricante`) VALUES ('Fone de Ouvido', 'Generico', 'Microsoft');
-INSERT INTO `chamados`.`hardware` (`nome`, `tipo`, `fabricante`) VALUES ('Monitor 3D', 'Desktop', 'IBM');
+INSERT INTO `chamados`.`hardware` (`nome`, `tipo`, `fabricante`) VALUES ('Monitor', 'Desktop', 'IBM');
 INSERT INTO `chamados`.`hardware` (`nome`, `tipo`, `fabricante`) VALUES ('Servidor VMware vSphere Hypervisor', 'Servidor', 'HOYLER Tecnologia');
+INSERT INTO `chamados`.`hardware` (`nome`, `tipo`, `fabricante`) VALUES ('Sem Usar1', 'Servidor', 'HOYLER Tecnologia');
+INSERT INTO `chamados`.`hardware` (`nome`, `tipo`, `fabricante`) VALUES ('Sem Usar2', 'Servidor', 'HOYLER Tecnologia');
+INSERT INTO `chamados`.`hardware` (`nome`, `tipo`, `fabricante`) VALUES ('Sem Usar3', 'Servidor', 'HOYLER Tecnologia');
 select * from `chamados`.`hardware`;
 
 

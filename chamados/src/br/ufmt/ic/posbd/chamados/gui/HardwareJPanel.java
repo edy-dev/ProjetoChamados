@@ -217,14 +217,14 @@ public class HardwareJPanel extends javax.swing.JPanel {
                         .addComponent(SalvarJButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-                .addGap(140, 140, 140))
+                .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void ListarjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarjButtonActionPerformed
         // TODO add your handling code here:
         tabelaJTable.setModel(tableModel);
-         tableModel.atualizar(dao.listar());
+        tableModel.atualizar(dao.listar());
     }//GEN-LAST:event_ListarjButtonActionPerformed
 
     private void LimparjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimparjButtonActionPerformed
@@ -234,18 +234,23 @@ public class HardwareJPanel extends javax.swing.JPanel {
 
     private void ExcluirJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirJButtonActionPerformed
         // TODO add your handling code here:
-                int[] linhas = tabelaJTable.getSelectedRows();
-        if (JOptionPane.showConfirmDialog(ExcluirJButton,
-                "Deseja realmente excluir?")
-                == JOptionPane.YES_OPTION) {
+        if (tabelaJTable.getSelectedRowCount() == 1) {
+            int[] linhas = tabelaJTable.getSelectedRows();
+            if (JOptionPane.showConfirmDialog(ExcluirJButton,
+                    "Deseja realmente excluir?")
+                    == JOptionPane.YES_OPTION) {
 
-            for (int i = 0; i < linhas.length; i++) {
-                Hardware hardware = tableModel.get(linhas[i]);
-                dao.excluir(hardware.getId());
+                for (int i = 0; i < linhas.length; i++) {
+                    Hardware hardware = tableModel.get(linhas[i]);
+                    dao.excluir(hardware.getId());
+                }
+                JOptionPane.showMessageDialog(tabelaJTable,
+                        "Removidos com Sucesso!");
+                tableModel.atualizar(dao.listar());
             }
+        } else {
             JOptionPane.showMessageDialog(tabelaJTable,
-                    "Removidos com Sucesso!");
-            tableModel.atualizar(dao.listar());
+                    "Selecione somente 1 linha!");
         }
     }//GEN-LAST:event_ExcluirJButtonActionPerformed
 
@@ -259,7 +264,7 @@ public class HardwareJPanel extends javax.swing.JPanel {
 
     private void editarjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarjButtonActionPerformed
         // TODO add your handling code here:
-            if (tabelaJTable.getSelectedRowCount() == 1) {
+        if (tabelaJTable.getSelectedRowCount() == 1) {
             int linha = tabelaJTable.getSelectedRow();
             Hardware edicao = tableModel.get(linha);
             IDJTextField.setText(edicao.getId() + "");
@@ -275,32 +280,30 @@ public class HardwareJPanel extends javax.swing.JPanel {
     private void SalvarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarJButtonActionPerformed
         // TODO add your handling code here:
 
-        
-            if (!EquipamentoJTextField.getText().equals("")) {
+        if (!EquipamentoJTextField.getText().equals("")) {
             Hardware hardware = new Hardware();
 
             hardware.setNome(EquipamentoJTextField.getText());
             hardware.setTipo(TipojComboBox.getSelectedItem().toString());
             hardware.setFabricante(FabricanteJComboBox.getSelectedItem().toString());
 
-            if(!IDJTextField.getText().equals("")){
+            if (!IDJTextField.getText().equals("")) {
                 int id = Integer.parseInt(IDJTextField.getText());
                 hardware.setId(id);
                 dao.alterar(hardware);
                 JOptionPane.showMessageDialog(SalvarJButton,
-                    "Atualizado com Sucesso!");
-            }else{
+                        "Atualizado com Sucesso!");
+            } else {
                 dao.inserir(hardware);
                 JOptionPane.showMessageDialog(SalvarJButton,
-                    "Inserido com Sucesso!");
+                        "Inserido com Sucesso!");
             }
 
             tableModel.atualizar(dao.listar());
-            
-            
-           CancelarjButtonActionPerformed(evt);
-            
-        }else{
+
+            CancelarjButtonActionPerformed(evt);
+
+        } else {
             JOptionPane.showMessageDialog(EquipamentoJTextField,
                     "Informe o campo nome!");
             EquipamentoJTextField.grabFocus();

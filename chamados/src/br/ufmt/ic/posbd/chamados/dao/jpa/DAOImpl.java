@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.ufmt.ic.posbd.chamados.dao.jpa;
 
 import br.ufmt.ic.posbd.chamados.dao.DAO;
+import br.ufmt.ic.posbd.chamadosPostgres.entidade.Status;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -18,18 +18,18 @@ import javax.persistence.Query;
  *
  * @author edy
  */
-public class DAOImpl<J> implements DAO<J>{
+public class DAOImpl<J> implements DAO<J> {
 
-    protected EntityManagerFactory emf = 
-            Persistence.createEntityManagerFactory("chamadosPU");
+    protected EntityManagerFactory emf
+            = Persistence.createEntityManagerFactory("chamadosPU");
     private Class cls;
-    
-    public DAOImpl(){
+
+    public DAOImpl() {
         cls = (Class<J>) ((ParameterizedType) getClass()
                 .getGenericSuperclass())
                 .getActualTypeArguments()[0];
     }
-    
+
     @Override
     public boolean inserir(J t) {
         EntityManager em = emf.createEntityManager();
@@ -69,8 +69,7 @@ public class DAOImpl<J> implements DAO<J>{
     public List<J> listar() {
         EntityManager em = emf.createEntityManager();
         String nome = cls.getSimpleName();
-        Query query = em.createQuery("SELECT c FROM "+nome+" c");
+        Query query = em.createQuery("SELECT c FROM " + nome + " c");
         return query.getResultList();
     }
-    
 }

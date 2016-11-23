@@ -29,19 +29,19 @@ public class EmpresaJPanel extends javax.swing.JPanel {
     public EmpresaJPanel() {
         tableModel = new EmpresaTableModel(dao.listar());
         this.initComponents();
-         this.CarregarComboBOX();
+        this.CarregarComboBOX();
     }
-    private void CarregarComboBOX()
-    {
-         CidadeJComboBox.removeAllItems();
-        List<Cidade> cidades  = FabricaDAO.criarCidadeDAO().listar();
+
+    private void CarregarComboBOX() {
+        CidadeJComboBox.removeAllItems();
+        List<Cidade> cidades = FabricaDAO.criarCidadeDAO().listar();
         CidadeJComboBox.addItem("Selecione uma Cidade...");
         for (Cidade cidade : cidades) {
-            CidadeJComboBox.addItem(cidade.getNome());           
+            CidadeJComboBox.addItem(cidade.getNome());
         };
-   
+
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -212,9 +212,9 @@ public class EmpresaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ListarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarJButtonActionPerformed
-        
-         tabelaJTable.setModel(tableModel);
-         tableModel.atualizar(dao.listar());
+
+        tabelaJTable.setModel(tableModel);
+        tableModel.atualizar(dao.listar());
     }//GEN-LAST:event_ListarJButtonActionPerformed
 
     private void LimparJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimparJButtonActionPerformed
@@ -224,19 +224,23 @@ public class EmpresaJPanel extends javax.swing.JPanel {
 
     private void ExcluirJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirJButtonActionPerformed
         // TODO add your handling code here:
+        if (tabelaJTable.getSelectedRowCount() == 1) {
+            int[] linhas = tabelaJTable.getSelectedRows();
+            if (JOptionPane.showConfirmDialog(ExcluirJButton,
+                    "Deseja realmente excluir?")
+                    == JOptionPane.YES_OPTION) {
 
-        int[] linhas = tabelaJTable.getSelectedRows();
-        if (JOptionPane.showConfirmDialog(ExcluirJButton,
-                "Deseja realmente excluir?")
-                == JOptionPane.YES_OPTION) {
-
-            for (int i = 0; i < linhas.length; i++) {
-                Empresa empresa = tableModel.get(linhas[i]);
-                dao.excluir(empresa.getId());
+                for (int i = 0; i < linhas.length; i++) {
+                    Empresa empresa = tableModel.get(linhas[i]);
+                    dao.excluir(empresa.getId());
+                }
+                JOptionPane.showMessageDialog(tabelaJTable,
+                        "Removidos com Sucesso!");
+                tableModel.atualizar(dao.listar());
             }
+        } else {
             JOptionPane.showMessageDialog(tabelaJTable,
-                    "Removidos com Sucesso!");
-            tableModel.atualizar(dao.listar());
+                    "Selecione somente 1 linha!");
         }
     }//GEN-LAST:event_ExcluirJButtonActionPerformed
 
@@ -266,31 +270,30 @@ public class EmpresaJPanel extends javax.swing.JPanel {
 
     private void SalvarJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarJButtonActionPerformed
         // TODO add your handling code here:
-         if (!EmpresaJTextField.getText().equals("")) {
+        if (!EmpresaJTextField.getText().equals("")) {
             Empresa empresa = new Empresa();
 
             empresa.setNome(EmpresaJTextField.getText());
             empresa.setCNPJ(CNPJJTextField.getText());
             empresa.setCidade(CidadeJComboBox.getSelectedItem().toString());
 
-            if(!IDJTextField.getText().equals("")){
+            if (!IDJTextField.getText().equals("")) {
                 int id = Integer.parseInt(IDJTextField.getText());
                 empresa.setId(id);
                 dao.alterar(empresa);
                 JOptionPane.showMessageDialog(SalvarJButton,
-                    "Atualizado com Sucesso!");
-            }else{
+                        "Atualizado com Sucesso!");
+            } else {
                 dao.inserir(empresa);
                 JOptionPane.showMessageDialog(SalvarJButton,
-                    "Inserido com Sucesso!");
+                        "Inserido com Sucesso!");
             }
 
             tableModel.atualizar(dao.listar());
-            
-            
-           CancelarJButtonActionPerformed(evt);
-            
-        }else{
+
+            CancelarJButtonActionPerformed(evt);
+
+        } else {
             JOptionPane.showMessageDialog(EmpresaJTextField,
                     "Informe o campo nome!");
             EmpresaJTextField.grabFocus();
